@@ -16,7 +16,10 @@ gray_code #(.WIDTH(WIDTH), .INVERT(1)) degray_code_receiver(.in(value_chain[0]),
 
 always_ff @(posedge destination_clock)
 begin
-    value_chain <= {value, value_chain[CHAIN_LENGTH-1:0]};
+    if (CHAIN_LENGTH > 1)
+        value_chain <= {gray_value, value_chain[CHAIN_LENGTH-1:0]};
+    else
+        value_chain <= '{gray_value};
     captured_value <= degray_value;
 end
 
