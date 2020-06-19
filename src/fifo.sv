@@ -31,7 +31,7 @@ assign data_in_used = sender - moved_receiver;
 
 always_ff @(posedge sender_clock)
 begin
-    if (data_in_enable && data_in_used < ~POINTER_WIDTH'(0))
+    if (data_in_enable && data_in_used < POINTER_WIDTH'(~0))
     begin
         buffer[sender] <= data_in;
         sender <= sender + 1'd1;
